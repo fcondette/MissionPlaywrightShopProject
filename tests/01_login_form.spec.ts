@@ -17,7 +17,7 @@ const loginURL = "/exercises/login-form";
 //login identifiants valides et assertion
 test("login avec identifiants valides", async ({ page }) => {
 	await page.goto(loginURL);
-	await page.getByLabel("Emailz").fill(email);
+	await page.getByLabel("Email").fill(email);
 	await page.getByLabel("Password").fill(motDePasse);
 	await page.getByRole("button", { name: "Sign In" }).click();
 	await expect(page.getByText("Login successful! Welcome back.")).toBeVisible();
