@@ -4,16 +4,18 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"checkboxes": "npx playwright test 02_checkboxes.spec.ts",
-		"headed": "npx playwright test --headed",
-		"ui": "npx playwright test --ui",
-		"ci:report": "npx playwright test && npx playwright show-report"
+		"test": "dotenvx run -f env/.env.local -- playwright test",
+		"test:headed": "dotenvx run -f env/.env.local -- playwright test --headed",
+		"test:ui": "dotenvx run -f env/.env.local -- playwright test --ui",
+		"test:report": "playwright show-report",
+		"test:debug": "dotenvx run -f env/.env.local -- playwright test --debug"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"type": "commonjs",
 	"devDependencies": {
+		"@dotenvx/dotenvx": "^2.14.0",
 		"@faker-js/faker": "^10.5.0",
 		"@playwright/test": "^1.61.1",
 		"@types/node": "^26.1.1"
