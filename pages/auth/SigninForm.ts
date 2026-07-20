@@ -3,8 +3,8 @@
 import { Page, Locator } from "@playwright/test";
 
 export class SigninForm {
-	private readonly emailInput: Locator;
-	private readonly passwordInput: Locator;
+	readonly emailInput: Locator;
+	readonly passwordInput: Locator;
 	private readonly submitButton: Locator;
 
 	constructor(private readonly page: Page) {
