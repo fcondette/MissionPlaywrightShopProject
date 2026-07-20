@@ -16,6 +16,14 @@ export function generateUser() {
 	};
 }
 
+export function generateInvalidUser() {
+	return {
+		fullName: "James Smith",
+		email: "james.smith@test.c",
+		password: "Test123456!",
+	};
+}
+
 export function generateUserFaker() {
 	return {
 		fullName: faker.person.fullName(),

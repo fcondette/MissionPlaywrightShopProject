@@ -4,9 +4,9 @@ import { Page, Locator } from "@playwright/test";
 
 export class SignupForm {
 	private readonly fullnameInput: Locator;
-	private readonly emailInput: Locator;
-	private readonly passwordInput: Locator;
-	private readonly confirmPasswordInput: Locator;
+	readonly emailInput: Locator;
+	readonly passwordInput: Locator;
+	readonly confirmPasswordInput: Locator;
 	private readonly createButton: Locator;
 
 	constructor(private readonly page: Page) {

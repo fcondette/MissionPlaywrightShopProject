@@ -13,7 +13,7 @@ test("user can sign UP with faker", async ({ authPage, page }) => {
 		user.password,
 		user.password,
 	);
-	await authPage.signupForm.create();
+	await authPage.signupFormFaker.create();
 	await expect(
 		page.getByText("Inscription réussie !", { exact: true }),
 	).toBeVisible();
