@@ -8,6 +8,14 @@ export function existingUser() {
 	};
 }
 
+export function nonRegisteredUser() {
+	return {
+		fullName: "Jack Jones",
+		email: "jack@test.com",
+		password: "jack12345!",
+	};
+}
+
 export function generateUser() {
 	return {
 		fullName: "John Doe",

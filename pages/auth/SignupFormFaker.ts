@@ -1,4 +1,4 @@
-//signup page
+//signup page faker
 
 import { Page, Locator } from "@playwright/test";
 
