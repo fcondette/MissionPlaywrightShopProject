@@ -1,5 +1,5 @@
-import { test, expect } from "../fixtures";
-import { generateInvalidUser, generateUser } from "../helpers/testData";
+import { test, expect } from "../../fixtures";
+import { generateInvalidUser, generateUser } from "../../helpers/testData";
 
 // 1 - Create account with valid data
 test("user can sign UP with valid credentials", async ({ authPage, page }) => {

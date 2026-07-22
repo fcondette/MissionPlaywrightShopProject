@@ -8,6 +8,22 @@ export function existingUser() {
 	};
 }
 
+export function existingUserMixedCase() {
+	return {
+		fullName: "John Doe2",
+		email: "John.Doe2@Example.com",
+		password: "Test12345!",
+	};
+}
+
+export function existingUserWrongPassword() {
+	return {
+		fullName: "John Doe2",
+		email: "john.doe2@example.com",
+		password: "WrongPassword123!",
+	};
+}
+
 export function nonRegisteredUser() {
 	return {
 		fullName: "Jack Jones",

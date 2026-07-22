@@ -23,9 +23,17 @@ export class SigninForm {
 		this.forgotBackButton = page.getByTestId("forgot-back-button");
 	}
 
-	async fillForm(email: string, password: string) {
+	async fillEmail(email: string) {
 		await this.emailInput.fill(email);
+	}
+
+	async fillPassword(password: string) {
 		await this.passwordInput.fill(password);
+	}
+
+	async fillForm(email: string, password: string) {
+		await this.fillEmail(email);
+		await this.fillPassword(password);
 	}
 	async fillFormReset(email: string) {
 		await this.forgotEmailInput.fill(email);

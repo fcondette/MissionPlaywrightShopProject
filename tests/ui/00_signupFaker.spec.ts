@@ -1,5 +1,5 @@
-import { test, expect } from "../fixtures";
-import { generateUserFaker } from "../helpers/testData";
+import { test, expect } from "../../fixtures";
+import { generateUserFaker } from "../../helpers/testData";
 
 // 1 - Create account using faker
 test("user can sign UP with faker", async ({ authPage, page }) => {
