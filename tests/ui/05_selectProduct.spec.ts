@@ -1,10 +1,10 @@
 import { test, expect } from "../../fixtures";
 
-test.use({ storageState: "playwright/.auth/user.json" });
-
-test.describe("Select products", () => {
-	test("user can select one product", async ({ topMenu, page }) => {
-		await page.goto("/");
-		await topMenu.goToProducts();
-	});
+test("user can select a product from the products page", async ({
+	page,
+	topMenu,
+}) => {
+	const productsPage = await topMenu.goToProducts();
+	await productsPage.selectProduct("Écouteurs Sans Fil Pro");
+	await expect(page).toHaveURL(/\/product\/1/);
 });

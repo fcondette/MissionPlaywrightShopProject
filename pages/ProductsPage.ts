@@ -1,27 +1,14 @@
-import { Page, Locator } from "@playwright/test";
+import { Page } from "@playwright/test";
+import { ProductDetailPage } from "./ProductDetailPage";
 
 export class ProductsPage {
-	private readonly userMenuButton: Locator;
-	private readonly logoutOption: Locator;
-	private readonly accountOption: Locator;
+	constructor(private readonly page: Page) {}
 
-	constructor(private readonly page: Page) {
-		this.userMenuButton = page.getByTestId("user-menu-button");
-		this.logoutOption = page.getByTestId("logout-button");
-		this.accountOption = page.getByTestId("account-link");
-	}
-
-	async openMenu() {
-		await this.userMenuButton.click();
-	}
-
-	async openAccount() {
-		await this.openMenu();
-		await this.accountOption.click();
-	}
-
-	async logout() {
-		await this.openMenu();
-		await this.logoutOption.click();
+	async selectProduct(productName: string): Promise<ProductDetailPage> {
+		await this.page
+			.getByTestId(/^product-card-\d+$/)
+			.filter({ hasText: productName })
+			.click();
+		return new ProductDetailPage(this.page);
 	}
 }
