@@ -17,7 +17,7 @@
 	"devDependencies": {
 		"@dotenvx/dotenvx": "^2.14.0",
 		"@faker-js/faker": "^10.5.0",
-		"@playwright/test": "^1.61.1",
+		"@playwright/test": "^1.62.1",
 		"@types/node": "^26.1.1"
 	},
 	"dependencies": {
