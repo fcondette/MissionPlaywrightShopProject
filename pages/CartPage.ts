@@ -1,5 +1,5 @@
 import { Page, Locator } from "@playwright/test";
-import { CheckoutPage } from "./CheckoutPage";
+import { CheckoutPage } from "./checkout/CheckoutPage";
 import { ProductsPage } from "./ProductsPage";
 
 export class CartPage {
