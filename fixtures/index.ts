@@ -2,11 +2,13 @@ import { test as base, expect } from "@playwright/test";
 import { AuthPage } from "../pages/auth/AuthPage";
 import { AccountMenu } from "../pages/AccountMenu";
 import { TopMenu } from "../pages/TopMenu";
+import { HomePage } from "../pages/HomePage";
 
 type Fixtures = {
 	authPage: AuthPage;
 	accountMenu: AccountMenu;
 	topMenu: TopMenu;
+	homePage: HomePage;
 };
 
 export const test = base.extend<Fixtures>({
@@ -18,6 +20,9 @@ export const test = base.extend<Fixtures>({
 	},
 	topMenu: async ({ page }, use) => {
 		await use(new TopMenu(page));
+	},
+	homePage: async ({ page }, use) => {
+		await use(new HomePage(page));
 	},
 });
 

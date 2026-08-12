@@ -1,23 +1,17 @@
-import { Page, Locator } from "@playwright/test";
+import { Page } from "@playwright/test";
+import { ProductsPage } from "./ProductsPage";
+import { AboutPage } from "./AboutPage";
 
 export class HomePage {
-	// private readonly userMenuButton: Locator;
-	// private readonly logoutOption: Locator;
-	// private readonly accountOption: Locator;
-	// constructor(private readonly page: Page) {
-	// 	this.userMenuButton = page.getByTestId("user-menu-button");
-	// 	this.logoutOption = page.getByTestId("logout-button");
-	// 	this.accountOption = page.getByTestId("account-link");
-	// }
-	// async openMenu() {
-	// 	await this.userMenuButton.click();
-	// }
-	// async openAccount() {
-	// 	await this.openMenu();
-	// 	await this.accountOption.click();
-	// }
-	// async logout() {
-	// 	await this.openMenu();
-	// 	await this.logoutOption.click();
-	// }
+	constructor(private readonly page: Page) {}
+
+	async goToProducts(): Promise<ProductsPage> {
+		await this.page.getByTestId("hero-cta-button").click();
+		return new ProductsPage(this.page);
+	}
+
+	async goToAbout(): Promise<AboutPage> {
+		await this.page.getByTestId("hero-about-button").click();
+		return new AboutPage(this.page);
+	}
 }
