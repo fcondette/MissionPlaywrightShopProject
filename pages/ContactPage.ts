@@ -1,23 +1,29 @@
-import { Page, Locator } from "@playwright/test";
+import { Page } from "@playwright/test";
+
+export type ContactDetails = {
+	name: string;
+	email: string;
+	subject: string;
+	message: string;
+};
 
 export class ContactPage {
-	// private readonly userMenuButton: Locator;
-	// private readonly logoutOption: Locator;
-	// private readonly accountOption: Locator;
-	// constructor(private readonly page: Page) {
-	// 	this.userMenuButton = page.getByTestId("user-menu-button");
-	// 	this.logoutOption = page.getByTestId("logout-button");
-	// 	this.accountOption = page.getByTestId("account-link");
-	// }
-	// async openMenu() {
-	// 	await this.userMenuButton.click();
-	// }
-	// async openAccount() {
-	// 	await this.openMenu();
-	// 	await this.accountOption.click();
-	// }
-	// async logout() {
-	// 	await this.openMenu();
-	// 	await this.logoutOption.click();
-	// }
+	constructor(private readonly page: Page) {}
+
+	async fill(details: ContactDetails): Promise<void> {
+		await this.page
+			.getByLabel("Nom complet", { exact: true })
+			.fill(details.name);
+		await this.page.getByLabel("Email", { exact: true }).fill(details.email);
+		await this.page.getByLabel("Sujet", { exact: true }).fill(details.subject);
+		await this.page
+			.getByLabel("Message", { exact: true })
+			.fill(details.message);
+	}
+
+	async submit(): Promise<void> {
+		await this.page
+			.getByRole("button", { name: "Envoyer le message", exact: true })
+			.click();
+	}
 }

@@ -76,3 +76,11 @@ export function generatePaymentDetails() {
 		cvv: faker.finance.creditCardCVV(),
 	};
 }
+export function generateContactDetails(): ContactDetails {
+	return {
+		name: faker.person.fullName(),
+		email: faker.internet.email(),
+		subject: faker.lorem.sentence(4),
+		message: faker.lorem.paragraph(),
+	};
+}
