@@ -3,25 +3,37 @@ import { fakerFR as faker } from "@faker-js/faker";
 export function existingUser() {
 	return {
 		fullName: "John Doe2",
-		email: "john.doe2@example.com",
-		password: "Test12345!",
+		email: process.env.TEST_USER_EMAIL!,
+		password: process.env.TEST_USER_PASSWORD!,
 	};
 }
 
 export function existingUserMixedCase() {
+	const email = process.env.TEST_USER_EMAIL!;
+	const [local, domain] = email.split("@");
+	const mixedCaseEmail = `${capitalizeEachPart(local)}@${capitalize(domain)}`;
+
 	return {
 		fullName: "John Doe2",
-		email: "John.Doe2@Example.com",
-		password: "Test12345!",
+		email: mixedCaseEmail,
+		password: process.env.TEST_USER_PASSWORD!,
 	};
 }
 
 export function existingUserWrongPassword() {
 	return {
 		fullName: "John Doe2",
-		email: "john.doe2@example.com",
+		email: process.env.TEST_USER_EMAIL!,
 		password: "WrongPassword123!",
 	};
+}
+
+function capitalize(s: string): string {
+	return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function capitalizeEachPart(s: string): string {
+	return s.split(".").map(capitalize).join(".");
 }
 
 export function nonRegisteredUser() {
