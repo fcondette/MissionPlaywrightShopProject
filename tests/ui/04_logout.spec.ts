@@ -5,7 +5,6 @@ test.use({ storageState: "playwright/.auth/user.json" });
 // User can signout
 test("user can logout", async ({ accountMenu, page }) => {
 	await page.goto("/");
-	await accountMenu.openMenu();
 	await accountMenu.logout();
 	await expect(page).toHaveURL(`${process.env.BASE_URL}/`);
 
