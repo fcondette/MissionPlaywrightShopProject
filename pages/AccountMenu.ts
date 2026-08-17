@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { AccountPage } from "./AccountPage";
 
 export class AccountMenu {
 	private readonly userMenuButton: Locator;
@@ -15,10 +16,16 @@ export class AccountMenu {
 		await this.userMenuButton.click();
 	}
 
-	async openAccount() {
+	async openAccount(): Promise<AccountPage> {
 		await this.openMenu();
 		await this.accountOption.click();
+		return new AccountPage(this.page);
 	}
+
+	// async openAccount() {
+	// 	await this.openMenu();
+	// 	await this.accountOption.click();
+	// }
 
 	async logout() {
 		await this.openMenu();
