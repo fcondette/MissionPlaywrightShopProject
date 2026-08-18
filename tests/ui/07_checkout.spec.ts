@@ -46,47 +46,51 @@ test.describe("Checkout", () => {
 	test.describe("as an authenticated user", () => {
 		test.use({ storageState: "playwright/.auth/user.json" });
 
-		test("user can complete checkout", async ({ page, topMenu }) => {
-			let productsPage: ProductsPage;
-			let productDetailPage: ProductDetailPage;
-			let cartPage: CartPage;
-			let checkoutPage: CheckoutPage;
+		test(
+			"user can complete checkout",
+			{ tag: ["@smoke"] },
+			async ({ page, topMenu }) => {
+				let productsPage: ProductsPage;
+				let productDetailPage: ProductDetailPage;
+				let cartPage: CartPage;
+				let checkoutPage: CheckoutPage;
 
-			await test.step("add a product to the cart", async () => {
-				await page.goto("/");
-				productsPage = await topMenu.goToProducts();
-				productDetailPage = await productsPage.selectProduct(
-					"Écouteurs Sans Fil Pro",
-				);
-				await productDetailPage.addToCart();
-			});
+				await test.step("add a product to the cart", async () => {
+					await page.goto("/");
+					productsPage = await topMenu.goToProducts();
+					productDetailPage = await productsPage.selectProduct(
+						"Écouteurs Sans Fil Pro",
+					);
+					await productDetailPage.addToCart();
+				});
 
-			await test.step("navigate to checkout", async () => {
-				cartPage = await topMenu.goToCart();
-				checkoutPage = await cartPage.goToCheckout();
-			});
+				await test.step("navigate to checkout", async () => {
+					cartPage = await topMenu.goToCart();
+					checkoutPage = await cartPage.goToCheckout();
+				});
 
-			await test.step("fill and submit shipping details", async () => {
-				const shipping = generateShippingDetails();
-				await checkoutPage.shippingForm.fill(shipping);
-				await checkoutPage.shippingForm.submit();
-			});
+				await test.step("fill and submit shipping details", async () => {
+					const shipping = generateShippingDetails();
+					await checkoutPage.shippingForm.fill(shipping);
+					await checkoutPage.shippingForm.submit();
+				});
 
-			await test.step("fill and submit payment details", async () => {
-				const payment = generatePaymentDetails();
-				await checkoutPage.paymentForm.fill(payment);
-				await checkoutPage.paymentForm.submit();
-			});
+				await test.step("fill and submit payment details", async () => {
+					const payment = generatePaymentDetails();
+					await checkoutPage.paymentForm.fill(payment);
+					await checkoutPage.paymentForm.submit();
+				});
 
-			await test.step("verify order confirmation", async () => {
-				await expect(
-					page.getByRole("heading", { name: "Commande confirmée !" }),
-				).toBeVisible();
+				await test.step("verify order confirmation", async () => {
+					await expect(
+						page.getByRole("heading", { name: "Commande confirmée !" }),
+					).toBeVisible();
 
-				const orderNumber =
-					await checkoutPage.orderConfirmation.getOrderNumber();
-				expect(orderNumber).toMatch(/^#TH-[A-F0-9]+$/);
-			});
-		});
+					const orderNumber =
+						await checkoutPage.orderConfirmation.getOrderNumber();
+					expect(orderNumber).toMatch(/^#TH-[A-F0-9]+$/);
+				});
+			},
+		);
 	});
 });
