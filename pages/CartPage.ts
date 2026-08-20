@@ -31,9 +31,7 @@ export class CartPage {
 		await this.page.getByTestId(`decrease-quantity-${productId}`).click();
 	}
 
-	async getQuantity(productId: number): Promise<string> {
-		return (
-			(await this.page.getByTestId(`quantity-${productId}`).textContent()) ?? ""
-		);
+	quantityField(id: number) {
+		return this.page.getByTestId(`quantity-${id}`);
 	}
 }

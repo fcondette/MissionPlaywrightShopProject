@@ -19,6 +19,7 @@ test("user can empty the cart", async ({ page, topMenu }) => {
 
 	await test.step("empty the cart", async () => {
 		cartPage = await topMenu.goToCart();
+		await expect(page.getByTestId("remove-item-1")).toBeVisible();
 		await cartPage.emptyCart();
 	});
 

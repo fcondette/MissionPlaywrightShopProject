@@ -3,7 +3,7 @@
 Observations collected while building an automated test suite for the TechHub
 demo shop (`shop.missionplaywright.fr`) with Playwright and TypeScript.
 
-These are not blocking defects — the application is a practice environment and
+Most are not blocking defects — the application is a practice environment and
 works as intended for its purpose. They are recorded because writing automated
 tests surfaces details that manual exploration tends to pass over, and because
 documenting them is part of the testing work itself.
@@ -13,6 +13,32 @@ Each entry notes what was observed, why it matters, and how it came to light.
 ---
 
 ## Functional and UX observations
+
+### Cart contents are lost on page reload
+
+**Observed:** Cart state is held only in client-side memory. Adding a
+product and then reloading the page — or pasting `/cart` into the address
+bar — returns an empty cart. The state survives in-app link clicks and
+nothing else.
+
+**Why it matters:** Users refresh pages. They also open a cart in a new
+tab, return to a bookmark, or come back after their browser restores a
+session. Every one of those loses the basket silently, with no message
+explaining what happened. Persisting the cart to `localStorage` or against
+the session server-side is standard behaviour precisely because this
+failure mode is invisible and costs the sale.
+
+**Consequence for automation:** `page.goto()` cannot be used to reach the
+cart once items have been added — the navigation itself clears the state,
+and the test would then assert against an empty cart while appearing to
+pass its earlier steps. Cart state has to be built through in-app clicks
+within a single page lifecycle.
+
+**How found:** Surfaced by an AI-assisted exploration run (Playwright test
+agents) reporting that cart state did not survive direct navigation, then
+reproduced manually with F5 and with a pasted URL.
+
+---
 
 ### Destructive action without confirmation
 

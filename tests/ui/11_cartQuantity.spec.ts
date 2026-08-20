@@ -24,7 +24,7 @@ test.describe("Cart quantity controls", () => {
 		});
 
 		await test.step("verify quantity and totals updated", async () => {
-			expect(await cartPage.getQuantity(4)).toBe("2");
+			await expect(cartPage.quantityField(4)).toHaveText("2");
 			await expect(
 				page.getByText("Sous-total (2 articles)", { exact: true }),
 			).toBeVisible();
@@ -55,6 +55,7 @@ test.describe("Cart quantity controls", () => {
 
 		await test.step("decrease quantity below 1", async () => {
 			cartPage = await topMenu.goToCart();
+			await expect(page.getByTestId("decrease-quantity-4")).toBeVisible();
 			await cartPage.decreaseQuantity(4);
 		});
 
